@@ -1,1 +1,163 @@
-jyffgfgf
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ristorante Bella Vita</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fcf9f9;
+      background: url('img/imgforno.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      
+      text-align: center;
+      padding: 40px 20px;
+      border-bottom: 5px solid rgba(68, 34, 2, 0.788);
+    }
+
+    header h1 {
+      font-size: 3em;
+      color: rgb(250, 249, 248);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    header a {
+      color: #fcf8f8;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav {
+      background-color: rgba(68, 34, 2, 0.788);
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    
+
+  
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      padding: 80px 20px;
+      background-color: rgba(119, 60, 4, 0.295);
+    }
+
+    .card {
+      width: 320px;
+      border: 2px solid #f6f1f1;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: rgba(68, 34, 2, 0.788);
+      box-shadow: 0 5px 20px rgba(68, 34, 2, 0.788);
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      color: rgb(249, 247, 246);
+      margin: 15px 0 10px;
+      font-size: 1.4em;
+    }
+
+    .card p {
+      padding: 0 15px 20px;
+      color:rgba(251, 250, 249, 0.974);
+    }
+
+    footer {
+      background-color:rgba(68, 34, 2, 0.788);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 1;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Ristorante Bella Vita</h1>
+    <p>Forno a legna e tradizione italiana 🍕</p>
+    <p><strong>Telefono:</strong> <a href="tel:+390612345678">06 1234 5678</a></p>
+  </header>
+
+  <nav>
+    <a href="relazione.html">Relazione</a>
+    
+  </nav>
+
+  <section class="hero">
+    <div class="card">
+      <a href="pizze/pizze.html">
+        <img src="img/imgpizze.jpg" alt="Le nostre pizze">
+      </a>
+      <h3>Pizze</h3>
+      <p>Le migliori pizze cotte nel nostro forno a legna, con ingredienti freschi e selezionati.</p>
+    </div>
+
+    <div class="card">
+      <a href="bevande/bevande.html">
+        <img src="img/imgbevande.jpg" alt="Le nostre bevande">
+      </a>
+      <h3>Bevande</h3>
+      <p>Birre artigianali, vini italiani e bevande rinfrescanti per accompagnare ogni piatto.</p>
+    </div>
+
+    <div class="card">
+      <a href="dolci/dolci.html">
+        <img src="img/imgdolci.jpg" alt="I nostri dolci">
+      </a>
+      <h3>Dolci</h3>
+      <p>Tiramisù, panna cotta e dolci della casa per concludere in dolcezza la tua esperienza.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Ristorante Bella Vita · Via Roma 25, Milano · 
+    <a href="tel:+390612345678">06 1234 5678</a> · 
+    <a href="mailto:info@bellavita.it">info@bellavita.it</a>
+  </footer>
+
+</body>
+</html>

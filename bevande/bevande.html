@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bevande - Ristorante Bella Vita</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #fcf9f9;
+      background: url('imgbevande.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      border-bottom: 5px solid rgba(68, 34, 2, 0.788);
+    }
+
+    header h1 {
+      font-size: 3em;
+      color: rgb(250, 249, 248);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    nav {
+      background-color: rgba(68, 34, 2, 0.788);
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 15px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffdd99;
+    }
+
+    .menu-section {
+      padding: 60px 20px;
+      background-color: rgba(119, 60, 4, 0.295);
+      text-align: center;
+    }
+
+    .menu-section h2 {
+      font-size: 2.5em;
+      color: #fff;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .drink-menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .drink-card {
+      background-color: rgba(68, 34, 2, 0.788);
+      border: 2px solid #f6f1f1;
+      border-radius: 12px;
+      width: 300px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(68, 34, 2, 0.788);
+      transition: transform 0.3s;
+    }
+
+    .drink-card:hover {
+      transform: scale(1.05);
+    }
+
+    .drink-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .drink-card h3 {
+      color: #fff;
+      margin: 15px 0 10px;
+      font-size: 1.5em;
+    }
+
+    .drink-card p {
+      padding: 0 15px;
+      color: rgba(251, 250, 249, 0.9);
+      font-size: 1em;
+    }
+
+    .price {
+      display: block;
+      margin: 10px 0 20px;
+      font-weight: bold;
+      color: #ffdd99;
+      font-size: 1.2em;
+    }
+
+    footer {
+      background-color: rgba(68, 34, 2, 0.788);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 1em;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Ristorante Bella Vita</h1>
+    <p>Bevande fresche e vini selezionati 🍷</p>
+  </header>
+
+  <nav>
+    <a href="../pizzeria.html">Home</a>
+   
+  </nav>
+
+  <section class="menu-section">
+    <h2>Le Nostre Bevande</h2>
+    <div class="drink-menu">
+
+      <div class="drink-card">
+        <img src="acqua.jpg" alt="Acqua Naturale">
+        <h3>Acqua Naturale</h3>
+        <p>Bottiglia da 0,75L - fresca e pura.</p>
+        <span class="price">€2,00</span>
+      </div>
+
+      <div class="drink-card">
+        <img src="acquafrizzante.jpg" alt="Acqua Frizzante">
+        <h3>Acqua Frizzante</h3>
+        <p>Bottiglia da 0,75L - con bollicine leggere.</p>
+        <span class="price">€2,00</span>
+      </div>
+
+      <div class="drink-card">
+        <img src="coca.jpg" alt="Coca Cola">
+        <h3>Coca Cola</h3>
+        <p>Bottiglia da 33cl - classica o zero.</p>
+        <span class="price">€3,00</span>
+      </div>
+
+      <div class="drink-card">
+        <img src="fanta.jpg" alt="Fanta">
+        <h3>Fanta</h3>
+        <p>Bottiglia da 33cl - gusto arancia naturale.</p>
+        <span class="price">€3,00</span>
+      </div>
+
+      <div class="drink-card">
+        <img src="birra.jpg" alt="Birra Artigianale">
+        <h3>Birra Artigianale</h3>
+        <p>Birra chiara non filtrata, 5% vol, 50cl.</p>
+        <span class="price">€5,00</span>
+      </div>
+
+      <div class="drink-card">
+        <img src="vino-rosso.jpg" alt="Vino Rosso della Casa">
+        <h3>Vino Rosso della Casa</h3>
+        <p>Calice o bottiglia di vino rosso toscano IGT.</p>
+        <span class="price">€4,00 / €14,00</span>
+      </div>
+
+      <div class="drink-card">
+        <img src="vino-bianco.jpg" alt="Vino Bianco della Casa">
+        <h3>Vino Bianco della Casa</h3>
+        <p>Calice o bottiglia di bianco fresco e fruttato.</p>
+        <span class="price">€4,00 / €14,00</span>
+      </div>
+
+      <div class="drink-card">
+        <img src="amari.jpg" alt="amari">
+        <h3>amari</h3>
+        <p>amari spiritosi, servito freddo.</p>
+        <span class="price">€3,50</span>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Ristorante Bella Vita · Via Roma 25, Milano · 
+    <a href="tel:+390612345678">06 1234 5678</a> · 
+    <a href="mailto:info@bellavita.it">info@bellavita.it</a>
+  </footer>
+
+</body>
+</html>
