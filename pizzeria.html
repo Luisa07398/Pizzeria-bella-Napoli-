@@ -18,10 +18,28 @@
     }
 
     header {
-      
+      position: relative; /* Necessario per posizionare il logo all’interno */
       text-align: center;
       padding: 40px 20px;
       border-bottom: 5px solid rgba(68, 34, 2, 0.788);
+    }
+
+    /* --- LOGO IN ALTO A DESTRA --- */
+    .logo-link {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .logo-link img {
+      width: 150px; /* dimensione del logo */
+      height: auto;
+      border-radius: 8px; /* opzionale, per angoli arrotondati */
+      transition: transform 0.3s ease;
+    }
+
+    .logo-link img:hover {
+      transform: scale(1.1);
     }
 
     header h1 {
@@ -48,10 +66,6 @@
       text-align: center;
       padding: 15px 0;
     }
-
-    
-
-  
 
     .hero {
       display: flex;
@@ -92,15 +106,14 @@
 
     .card p {
       padding: 0 15px 20px;
-      color:rgba(251, 250, 249, 0.974);
+      color: rgba(251, 250, 249, 0.974);
     }
 
     footer {
-      background-color:rgba(68, 34, 2, 0.788);
+      background-color: rgba(68, 34, 2, 0.788);
       color: white;
       text-align: center;
       padding: 20px;
-      font-size: 1;
     }
 
     footer a {
@@ -117,6 +130,11 @@
 <body>
 
   <header>
+    <!-- 🔹 LOGO IN ALTO A DESTRA -->
+    <a href="logo.html" class="logo-link">
+      <img src="img/logo.png" alt="Logo Ristorante Bella Vita">
+    </a>
+
     <h1>Ristorante Bella Vita</h1>
     <p>Forno a legna e tradizione italiana 🍕</p>
     <p><strong>Telefono:</strong> <a href="tel:+390612345678">06 1234 5678</a></p>
@@ -124,7 +142,6 @@
 
   <nav>
     <a href="relazione.html">Relazione</a>
-    
   </nav>
 
   <section class="hero">

@@ -83,6 +83,7 @@
       overflow: hidden;
       box-shadow: 0 5px 20px rgba(68, 34, 2, 0.788);
       transition: transform 0.3s;
+      cursor: pointer;
     }
 
     .drink-card:hover {
@@ -132,6 +133,72 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* ===== MODALE ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: rgba(68, 34, 2, 0.95);
+      border-radius: 12px;
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      color: #fff;
+      text-align: left;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #fff;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    form input, form select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .order-btn {
+      margin-top: 20px;
+      background-color: #ffdd99;
+      color: #442202;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    .order-btn:hover {
+      background-color: #ffe6b3;
+    }
   </style>
 </head>
 <body>
@@ -143,66 +210,65 @@
 
   <nav>
     <a href="../pizzeria.html">Home</a>
-   
   </nav>
 
   <section class="menu-section">
     <h2>Le Nostre Bevande</h2>
     <div class="drink-menu">
 
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Acqua Naturale">
         <img src="acqua.jpg" alt="Acqua Naturale">
         <h3>Acqua Naturale</h3>
         <p>Bottiglia da 0,75L - fresca e pura.</p>
         <span class="price">€2,00</span>
       </div>
 
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Acqua Frizzante">
         <img src="acquafrizzante.jpg" alt="Acqua Frizzante">
         <h3>Acqua Frizzante</h3>
         <p>Bottiglia da 0,75L - con bollicine leggere.</p>
         <span class="price">€2,00</span>
       </div>
 
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Coca Cola">
         <img src="coca.jpg" alt="Coca Cola">
         <h3>Coca Cola</h3>
         <p>Bottiglia da 33cl - classica o zero.</p>
         <span class="price">€3,00</span>
       </div>
 
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Fanta">
         <img src="fanta.jpg" alt="Fanta">
         <h3>Fanta</h3>
         <p>Bottiglia da 33cl - gusto arancia naturale.</p>
         <span class="price">€3,00</span>
       </div>
 
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Birra Artigianale">
         <img src="birra.jpg" alt="Birra Artigianale">
         <h3>Birra Artigianale</h3>
         <p>Birra chiara non filtrata, 5% vol, 50cl.</p>
         <span class="price">€5,00</span>
       </div>
 
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Vino Rosso della Casa">
         <img src="vino-rosso.jpg" alt="Vino Rosso della Casa">
         <h3>Vino Rosso della Casa</h3>
         <p>Calice o bottiglia di vino rosso toscano IGT.</p>
         <span class="price">€4,00 / €14,00</span>
       </div>
 
-      <div class="drink-card">
+      <div class="drink-card" data-drink="Vino Bianco della Casa">
         <img src="vino-bianco.jpg" alt="Vino Bianco della Casa">
         <h3>Vino Bianco della Casa</h3>
         <p>Calice o bottiglia di bianco fresco e fruttato.</p>
         <span class="price">€4,00 / €14,00</span>
       </div>
 
-      <div class="drink-card">
-        <img src="amari.jpg" alt="amari">
-        <h3>amari</h3>
-        <p>amari spiritosi, servito freddo.</p>
+      <div class="drink-card" data-drink="Amari">
+        <img src="amari.jpg" alt="Amari">
+        <h3>Amari</h3>
+        <p>Amari spiritosi, serviti freddi.</p>
         <span class="price">€3,50</span>
       </div>
 
@@ -214,6 +280,52 @@
     <a href="tel:+390612345678">06 1234 5678</a> · 
     <a href="mailto:info@bellavita.it">info@bellavita.it</a>
   </footer>
+
+  <!-- MODALE -->
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="drinkName"></h2>
+      <form id="orderForm">
+        <label for="quantity">Quantità:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+
+        <label for="notes">Note aggiuntive:</label>
+        <input type="text" id="notes" name="notes" placeholder="Es. senza ghiaccio, temperatura ambiente">
+
+        <button type="submit" class="order-btn">Invia Ordine</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("orderModal");
+    const closeBtn = document.querySelector(".close");
+    const drinkNameEl = document.getElementById("drinkName");
+    const drinkCards = document.querySelectorAll(".drink-card");
+
+    drinkCards.forEach(card => {
+      card.addEventListener("click", () => {
+        const drinkName = card.getAttribute("data-drink");
+        drinkNameEl.textContent = "Ordina " + drinkName;
+        modal.style.display = "flex";
+      });
+    });
+
+    closeBtn.onclick = () => {
+      modal.style.display = "none";
+    };
+
+    window.onclick = (e) => {
+      if (e.target == modal) modal.style.display = "none";
+    };
+
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Ordine inviato con successo! 🍹");
+      modal.style.display = "none";
+    });
+  </script>
 
 </body>
 </html>

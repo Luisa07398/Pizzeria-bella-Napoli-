@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pizze - Ristorante Bella Vita</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -83,6 +81,7 @@
       overflow: hidden;
       box-shadow: 0 5px 20px rgba(68, 34, 2, 0.788);
       transition: transform 0.3s;
+      cursor: pointer;
     }
 
     .pizza-card:hover {
@@ -132,6 +131,74 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* === MODALE === */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: rgba(68, 34, 2, 0.95);
+      border-radius: 12px;
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      color: #fff;
+      text-align: left;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #fff;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    form input, form select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .order-btn {
+      margin-top: 20px;
+      background-color: #ffdd99;
+      color: #442202;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+
+    .order-btn:hover {
+      background-color: #ffe6b3;
+    }
+
   </style>
 </head>
 <body>
@@ -143,64 +210,62 @@
 
   <nav>
     <a href="../pizzeria.html">Home</a>
-    
-    
   </nav>
 
   <section class="menu-section">
     <h2>Le Nostre Pizze</h2>
     <div class="pizza-menu">
 
-      <div class="pizza-card">
+      <div class="pizza-card" data-pizza="Margherita">
         <img src="margherita.jpg" alt="Pizza Margherita">
         <h3>Margherita</h3>
         <p>Pomodoro, mozzarella fior di latte e basilico fresco.</p>
         <span class="price">€7,00</span>
       </div>
 
-      <div class="pizza-card">
+      <div class="pizza-card" data-pizza="Diavola">
         <img src="diavola.jpg" alt="Pizza Diavola">
         <h3>Diavola</h3>
         <p>Pomodoro, mozzarella e salame piccante.</p>
         <span class="price">€8,00</span>
       </div>
 
-      <div class="pizza-card">
+      <div class="pizza-card" data-pizza="Quattro Stagioni">
         <img src="quattrostagioni.jpg" alt="Pizza Quattro Stagioni">
         <h3>Quattro Stagioni</h3>
         <p>Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi e olive.</p>
         <span class="price">€9,50</span>
       </div>
 
-      <div class="pizza-card">
+      <div class="pizza-card" data-pizza="Capricciosa">
         <img src="capricciosa.jpg" alt="Pizza Capricciosa">
         <h3>Capricciosa</h3>
         <p>Pomodoro, mozzarella, funghi, olive, carciofi e uovo sodo.</p>
         <span class="price">€9,00</span>
       </div>
 
-      <div class="pizza-card">
+      <div class="pizza-card" data-pizza="Prosciutto e Funghi">
         <img src="prosciuttofunghi.jpg" alt="Pizza Prosciutto e Funghi">
         <h3>Prosciutto e Funghi</h3>
         <p>Pomodoro, mozzarella, prosciutto cotto e funghi champignon.</p>
         <span class="price">€8,50</span>
       </div>
 
-      <div class="pizza-card">
+      <div class="pizza-card" data-pizza="Quattro Formaggi">
         <img src="quattroformaggi.jpg" alt="Pizza Quattro Formaggi">
         <h3>Quattro Formaggi</h3>
         <p>Mozzarella, gorgonzola, fontina e parmigiano.</p>
         <span class="price">€9,00</span>
       </div>
 
-      <div class="pizza-card">
+      <div class="pizza-card" data-pizza="Napoli">
         <img src="napoli.jpg" alt="Pizza Napoli">
         <h3>Napoli</h3>
         <p>Pomodoro, mozzarella, acciughe e origano.</p>
         <span class="price">€8,00</span>
       </div>
 
-      <div class="pizza-card">
+      <div class="pizza-card" data-pizza="Vegetariana">
         <img src="vegetariana.jpg" alt="Pizza Vegetariana">
         <h3>Vegetariana</h3>
         <p>Pomodoro, mozzarella e verdure di stagione grigliate.</p>
@@ -215,6 +280,58 @@
     <a href="tel:+390612345678">06 1234 5678</a> · 
     <a href="mailto:info@bellavita.it">info@bellavita.it</a>
   </footer>
+
+  <!-- MODALE -->
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="pizzaName"></h2>
+      <form id="orderForm">
+        <label for="quantity">Quantità:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+
+        <label for="size">Dimensione:</label>
+        <select id="size" name="size">
+          <option>Normale</option>
+          <option>Grande (+€2)</option>
+        </select>
+
+        <label for="notes">Note aggiuntive:</label>
+        <input type="text" id="notes" name="notes" placeholder="Es. senza olive, extra mozzarella">
+
+        <button type="submit" class="order-btn">Invia Ordine</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("orderModal");
+    const closeBtn = document.querySelector(".close");
+    const pizzaNameEl = document.getElementById("pizzaName");
+    const pizzaCards = document.querySelectorAll(".pizza-card");
+
+    pizzaCards.forEach(card => {
+      card.addEventListener("click", () => {
+        const pizzaName = card.getAttribute("data-pizza");
+        pizzaNameEl.textContent = "Ordina la " + pizzaName;
+        modal.style.display = "flex";
+      });
+    });
+
+    closeBtn.onclick = () => {
+      modal.style.display = "none";
+    };
+
+    window.onclick = (e) => {
+      if (e.target == modal) modal.style.display = "none";
+    };
+
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Ordine inviato con successo! 🍕");
+      modal.style.display = "none";
+    });
+  </script>
 
 </body>
 </html>
