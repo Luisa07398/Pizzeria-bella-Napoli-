@@ -9,7 +9,7 @@
   
   <style>
     :root {
-      --brown-dark: rgba(68, 34, 2, 0.9);
+      --brown-dark: rgb(41, 20, 2);
       --cream: rgba(250, 249, 248, 1);
       --highlight: #ffdd99;
       --overlay: rgba(0,0,0,0.75);
@@ -46,10 +46,13 @@
     }
 
     nav {
-      background-color: var(--brown-dark);
-      text-align: center;
-      padding: 15px 0;
-    }
+  background-color: var(--brown-dark);
+  text-align: center;
+  padding: 15px 0;
+  border-top: 4px solid #ffdd99c2;     /* Oro più intenso */
+  border-bottom: 4px solid #ffdd99d8;
+   /* Leggero bagliore */
+}
 
     nav a {
       color: var(--cream);
@@ -57,6 +60,7 @@
       font-weight: 600;
       margin: 0 20px;
       transition: color 0.3s ease;
+      font-size: 1.2rem; 
     }
 
     nav a:hover {
@@ -69,7 +73,7 @@
   justify-content: center;
   gap: 40px;
   padding: 60px 20px;
-  background: rgb(48, 24, 2);
+  background: rgba(53, 27, 3, 0.89);
   backdrop-filter: blur(3px);
 }
 
