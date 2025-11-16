@@ -4,328 +4,462 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bevande - Ristorante Bella Vita</title>
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      --brown-dark: rgba(68, 34, 2, 0.9);
+      --cream: rgba(250, 249, 248, 1);
+      --highlight: #ffdd99;
+      --overlay: rgba(0,0,0,0.75);
+      --button-hover: #ffe5b3;
     }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
       font-family: 'Poppins', sans-serif;
-      color: #fcf9f9;
+      color: var(--cream);
       background: url('imgbevande.jpg') no-repeat center center fixed;
       background-size: cover;
+      min-height: 100vh;
     }
 
     header {
       text-align: center;
-      padding: 40px 20px;
-      border-bottom: 5px solid rgba(68, 34, 2, 0.788);
+      padding: 50px 20px;
+      border-bottom: 5px solid var(--brown-dark);
+      background: var(--overlay);
     }
 
     header h1 {
-      font-size: 3em;
-      color: rgb(250, 249, 248);
-      margin: 0;
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      color: var(--highlight);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      margin-bottom: 10px;
     }
 
     header p {
-      font-size: 1.2em;
-      margin: 10px 0;
+      font-size: 1.2rem;
     }
 
     nav {
-      background-color: rgba(68, 34, 2, 0.788);
+      background-color: var(--brown-dark);
       text-align: center;
       padding: 15px 0;
     }
 
     nav a {
-      color: #fff;
+      color: var(--cream);
       text-decoration: none;
-      font-weight: bold;
-      margin: 0 15px;
-      transition: color 0.3s;
+      font-weight: 600;
+      margin: 0 20px;
+      transition: color 0.3s ease;
     }
 
     nav a:hover {
-      color: #ffdd99;
+      color: var(--highlight);
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      padding: 60px 20px;
+      background: rgb(48, 24, 2);
+      backdrop-filter: blur(3px);
     }
 
     .menu-section {
       padding: 60px 20px;
-      background-color: rgba(119, 60, 4, 0.295);
       text-align: center;
     }
 
     .menu-section h2 {
-      font-size: 2.5em;
-      color: #fff;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-family: 'Cinzel', serif;
+      color: var(--highlight);
+      font-size: 2.8rem;
+      margin-bottom: 40px;
     }
 
-    .drink-menu {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
+    /* Griglia bevande */
+.bevande-menu {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px; /* spazio tra le card */
+  padding: 0;
+}
 
-    .drink-card {
-      background-color: rgba(68, 34, 2, 0.788);
-      border: 2px solid #f6f1f1;
-      border-radius: 12px;
-      width: 300px;
-      overflow: hidden;
-      box-shadow: 0 5px 20px rgba(68, 34, 2, 0.788);
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
+.bevande-menu .drink-card {
+  background-color: var(--brown-dark);
+  border-radius: 15px; /* arrotondamento */
+  width: 100%;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 15px;
+}
 
-    .drink-card:hover {
-      transform: scale(1.05);
-    }
-
-    .drink-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+.drink-card img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-bottom: 3px solid var(--highlight);
+  border-top-left-radius: 15px;  /* arrotondamento immagini coerente */
+  border-top-right-radius: 15px;
+}
 
     .drink-card h3 {
-      color: #fff;
       margin: 15px 0 10px;
-      font-size: 1.5em;
+      font-size: 1.6rem;
     }
 
     .drink-card p {
       padding: 0 15px;
-      color: rgba(251, 250, 249, 0.9);
-      font-size: 1em;
+      font-size: 1rem;
+      text-align: center;
     }
 
     .price {
-      display: block;
-      margin: 10px 0 20px;
       font-weight: bold;
-      color: #ffdd99;
-      font-size: 1.2em;
+      font-size: 1.2rem;
+      margin: 10px 0;
+      color: var(--highlight);
+    }
+
+    .cart-btn {
+      background: var(--highlight);
+      color: var(--brown-dark);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-bottom: 10px;
+    }
+
+    .cart-btn:hover {
+      background: var(--button-hover);
     }
 
     footer {
-      background-color: rgba(68, 34, 2, 0.788);
-      color: white;
+      background-color: var(--brown-dark);
+      color: var(--cream);
       text-align: center;
-      padding: 20px;
-      font-size: 1em;
+      padding: 25px;
+      font-size: 1rem;
     }
 
     footer a {
-      color: white;
+      color: var(--cream);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
 
-    /* ===== MODALE ===== */
-    .modal {
-      display: none;
+    /* Cart Icon */
+    .cart-icon {
       position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: rgba(68, 34, 2, 0.95);
-      border-radius: 12px;
-      padding: 30px;
-      width: 90%;
-      max-width: 400px;
-      color: #fff;
-      text-align: left;
-      position: relative;
-    }
-
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      color: #fff;
-      font-size: 1.5em;
+      top: 20px;
+      right: 25px;
+      font-size: 2.2rem;
       cursor: pointer;
+      z-index: 2000;
+      color: var(--highlight);
+      text-shadow: 2px 2px 4px #000;
     }
 
-    form label {
-      display: block;
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: red;
+      color: white;
+      padding: 3px 7px;
+      font-size: 0.8rem;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    /* Cart Popup */
+    .cart-popup {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      width: 350px;
+      background: var(--brown-dark);
+      border: 2px solid var(--highlight);
+      border-radius: 12px;
+      padding: 20px;
+      color: white;
+      display: none;
+      z-index: 3000;
+      box-shadow: 0 5px 20px var(--overlay);
+    }
+
+    .cart-popup h3 {
+      font-family: 'Cinzel', serif;
+      text-align: center;
+      color: var(--highlight);
+      margin-bottom: 15px;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid var(--highlight);
+      padding: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+    }
+
+    .cart-total {
       margin-top: 15px;
       font-weight: bold;
+      text-align: right;
+      color: var(--highlight);
     }
 
-    form input, form select {
-      width: 100%;
+    .order-form {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .order-form input {
       padding: 8px;
-      margin-top: 5px;
-      border-radius: 8px;
+      border-radius: 6px;
       border: none;
+      font-size: 0.95rem;
     }
 
-    .order-btn {
-      margin-top: 20px;
-      background-color: #ffdd99;
-      color: #442202;
+    .order-form button {
+      background: var(--highlight);
+      border: none;
+      padding: 10px;
       font-weight: bold;
-      border: none;
       border-radius: 8px;
-      padding: 10px 20px;
       cursor: pointer;
-      width: 100%;
-      font-size: 1em;
-      transition: 0.3s;
+      transition: background 0.3s;
     }
 
-    .order-btn:hover {
-      background-color: #ffe6b3;
+    .order-form button:hover {
+      background: var(--button-hover);
+    }
+
+    .confirmation {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      color: var(--highlight);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 1200px) {
+      .bevande-menu { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .bevande-menu { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .bevande-menu { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.4rem; }
+      .menu-section h2 { font-size: 2rem; }
+      .drink-card img { height: 180px; }
+    }
+    @media (max-width: 480px) {
+      nav a { margin: 0 10px; }
+      .cart-popup { width: 90%; right: 5%; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Ristorante Bella Vita</h1>
-    <p>Bevande fresche e vini selezionati 🍷</p>
-  </header>
+<!-- Cart Icon -->
+<div class="cart-icon" onclick="toggleCart()">
+  🛒
+  <span class="cart-count" id="cartCount">0</span>
+</div>
 
-  <nav>
-    <a href="../pizzeria.html">Home</a>
-  </nav>
+<!-- Cart Popup -->
+<div class="cart-popup" id="cartPopup">
+  <h3>Il tuo carrello</h3>
+  <div id="cartItems"></div>
+  <p class="cart-total" id="cartTotal">Totale: €0.00</p>
 
-  <section class="menu-section">
-    <h2>Le Nostre Bevande</h2>
-    <div class="drink-menu">
+  <!-- Order Form -->
+  <form class="order-form" id="orderForm" onsubmit="submitOrder(event)">
+    <input type="text" id="customerName" placeholder="Nome e Cognome" required>
+    <input type="text" id="customerAddress" placeholder="Indirizzo" required>
+    <input type="tel" id="customerPhone" placeholder="Telefono" required>
+    <button type="submit">Ordina Ora</button>
+  </form>
+  <div class="confirmation" id="confirmationMsg"></div>
 
-      <div class="drink-card" data-drink="Acqua Naturale">
-        <img src="acqua.jpg" alt="Acqua Naturale">
-        <h3>Acqua Naturale</h3>
-        <p>Bottiglia da 0,75L - fresca e pura.</p>
-        <span class="price">€2,00</span>
-      </div>
+  <button class="cart-btn" onclick="clearCart()">Svuota Carrello</button>
+</div>
 
-      <div class="drink-card" data-drink="Acqua Frizzante">
-        <img src="acquafrizzante.jpg" alt="Acqua Frizzante">
-        <h3>Acqua Frizzante</h3>
-        <p>Bottiglia da 0,75L - con bollicine leggere.</p>
-        <span class="price">€2,00</span>
-      </div>
+<header>
+  <h1>pizzeria Bella Vita</h1>
+  <p>Bevande fresche per ogni gusto 🍹</p>
+</header>
 
-      <div class="drink-card" data-drink="Coca Cola">
-        <img src="coca.jpg" alt="Coca Cola">
-        <h3>Coca Cola</h3>
-        <p>Bottiglia da 33cl - classica o zero.</p>
-        <span class="price">€3,00</span>
-      </div>
+<nav>
+  <a href="../pizzeria.html">Home</a>
+</nav>
 
-      <div class="drink-card" data-drink="Fanta">
-        <img src="fanta.jpg" alt="Fanta">
-        <h3>Fanta</h3>
-        <p>Bottiglia da 33cl - gusto arancia naturale.</p>
-        <span class="price">€3,00</span>
-      </div>
+<section class="hero">
+<div class="menu-section">
+  <h2>LE NOSTRE BEVANDE</h2>
+  <div class="bevande-menu">
 
-      <div class="drink-card" data-drink="Birra Artigianale">
-        <img src="birra.jpg" alt="Birra Artigianale">
-        <h3>Birra Artigianale</h3>
-        <p>Birra chiara non filtrata, 5% vol, 50cl.</p>
-        <span class="price">€5,00</span>
-      </div>
-
-      <div class="drink-card" data-drink="Vino Rosso della Casa">
-        <img src="vino-rosso.jpg" alt="Vino Rosso della Casa">
-        <h3>Vino Rosso della Casa</h3>
-        <p>Calice o bottiglia di vino rosso toscano IGT.</p>
-        <span class="price">€4,00 / €14,00</span>
-      </div>
-
-      <div class="drink-card" data-drink="Vino Bianco della Casa">
-        <img src="vino-bianco.jpg" alt="Vino Bianco della Casa">
-        <h3>Vino Bianco della Casa</h3>
-        <p>Calice o bottiglia di bianco fresco e fruttato.</p>
-        <span class="price">€4,00 / €14,00</span>
-      </div>
-
-      <div class="drink-card" data-drink="Amari">
-        <img src="amari.jpg" alt="Amari">
-        <h3>Amari</h3>
-        <p>Amari spiritosi, serviti freddi.</p>
-        <span class="price">€3,50</span>
-      </div>
-
+    <div class="drink-card">
+      <img src="acqua.jpg" alt="Acqua Naturale">
+      <h3>Acqua Naturale</h3>
+      <p>Acqua minerale naturale fresca.</p>
+      <span class="price">€2,00</span>
+      <button class="cart-btn" onclick="addToCart('Acqua Naturale', 2)">Aggiungi al Carrello</button>
     </div>
-  </section>
 
-  <footer>
-    © 2025 Ristorante Bella Vita · Via Roma 25, Milano · 
-    <a href="tel:+390612345678">06 1234 5678</a> · 
-    <a href="mailto:info@bellavita.it">info@bellavita.it</a>
-  </footer>
-
-  <!-- MODALE -->
-  <div class="modal" id="orderModal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2 id="drinkName"></h2>
-      <form id="orderForm">
-        <label for="quantity">Quantità:</label>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
-
-        <label for="notes">Note aggiuntive:</label>
-        <input type="text" id="notes" name="notes" placeholder="Es. senza ghiaccio, temperatura ambiente">
-
-        <button type="submit" class="order-btn">Invia Ordine</button>
-      </form>
+    <div class="drink-card">
+      <img src="acquafrizzante.jpg" alt="Acqua Frizzante">
+      <h3>Acqua Frizzante</h3>
+      <p>Acqua minerale frizzante, leggera e rinfrescante.</p>
+      <span class="price">€2,00</span>
+      <button class="cart-btn" onclick="addToCart('Acqua Frizzante', 2)">Aggiungi al Carrello</button>
     </div>
+
+    <div class="drink-card">
+      <img src="coca.jpg" alt="Coca Cola">
+      <h3>Coca Cola</h3>
+      <p>Bibita gassata classica.</p>
+      <span class="price">€3,00</span>
+      <button class="cart-btn" onclick="addToCart('Coca Cola', 3)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+      <img src="fanta.jpg" alt="Fanta">
+      <h3>Fanta</h3>
+      <p>Bibita frizzante all'arancia.</p>
+      <span class="price">€3,00</span>
+      <button class="cart-btn" onclick="addToCart('Fanta', 3)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+      <img src="birra.jpg" alt="Birra">
+      <h3>Birra</h3>
+      <p>Bottiglia di birra chiara o scura.</p>
+      <span class="price">€4,00</span>
+      <button class="cart-btn" onclick="addToCart('Birra', 4)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+      <img src="vino-rosso.jpg" alt="Vino Rosso">
+      <h3>Vino Rosso</h3>
+      <p>Bicchiere di vino rosso selezione della casa.</p>
+      <span class="price">€5,00</span>
+      <button class="cart-btn" onclick="addToCart('Vino Rosso', 5)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+      <img src="vino-bianco.jpg" alt="Vino Bianco">
+      <h3>Vino Bianco</h3>
+      <p>Bicchiere di vino bianco fresco.</p>
+      <span class="price">€5,00</span>
+      <button class="cart-btn" onclick="addToCart('Vino Bianco', 5)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+      <img src="amari.jpg" alt="Amari">
+      <h3>Amari</h3>
+      <p>Selezione di amari italiani per concludere in dolcezza.</p>
+      <span class="price">€4,50</span>
+      <button class="cart-btn" onclick="addToCart('Amari', 4.5)">Aggiungi al Carrello</button>
+    </div>
+
   </div>
+</div>
+</section>
 
-  <script>
-    const modal = document.getElementById("orderModal");
-    const closeBtn = document.querySelector(".close");
-    const drinkNameEl = document.getElementById("drinkName");
-    const drinkCards = document.querySelectorAll(".drink-card");
+<footer>
+  © 2025 pizzeria Bella Vita · Via Roma 25, Milano · 
+  <a href="tel:+390612345678">06 1234 5678</a> · 
+  <a href="mailto:info@bellavita.it">info@bellavita.it</a>
+</footer>
 
-    drinkCards.forEach(card => {
-      card.addEventListener("click", () => {
-        const drinkName = card.getAttribute("data-drink");
-        drinkNameEl.textContent = "Ordina " + drinkName;
-        modal.style.display = "flex";
-      });
-    });
+<script>
+let cart = [];
 
-    closeBtn.onclick = () => {
-      modal.style.display = "none";
-    };
+function toggleCart() {
+  const popup = document.getElementById("cartPopup");
+  popup.style.display = popup.style.display === "block" ? "none" : "block";
+}
 
-    window.onclick = (e) => {
-      if (e.target == modal) modal.style.display = "none";
-    };
+function addToCart(name, price) {
+  const item = cart.find(p => p.name === name);
+  if(item) item.qty++;
+  else cart.push({ name, price, qty: 1 });
+  updateCart();
+}
 
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Ordine inviato con successo! 🍹");
-      modal.style.display = "none";
-    });
-  </script>
+function updateCart() {
+  const cartItems = document.getElementById("cartItems");
+  const cartCount = document.getElementById("cartCount");
+  const cartTotal = document.getElementById("cartTotal");
+
+  cartItems.innerHTML = "";
+  let total = 0;
+  let count = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.qty;
+    count += item.qty;
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <span>${item.name} x${item.qty}</span>
+        <span>€${(item.price * item.qty).toFixed(2)}</span>
+      </div>
+    `;
+  });
+
+  cartTotal.textContent = "Totale: €" + total.toFixed(2);
+  cartCount.textContent = count;
+}
+
+function clearCart() {
+  cart = [];
+  updateCart();
+  document.getElementById("confirmationMsg").textContent = "";
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+  if(cart.length === 0) { alert("Il carrello è vuoto!"); return; }
+
+  const name = document.getElementById("customerName").value;
+  const address = document.getElementById("customerAddress").value;
+  const phone = document.getElementById("customerPhone").value;
+
+  const orderSummary = cart.map(item => `${item.name} x${item.qty}`).join(", ");
+
+  document.getElementById("confirmationMsg").textContent = 
+    `Grazie ${name}! Il tuo ordine (${orderSummary}) è stato ricevuto e sarà consegnato a ${address}. Ti contatteremo al ${phone}.`;
+
+  clearCart();
+  document.getElementById("orderForm").reset();
+}
+</script>
 
 </body>
 </html>

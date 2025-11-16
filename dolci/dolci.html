@@ -1,329 +1,469 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dolci - Ristorante Bella Vita</title>
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    * { box-sizing: border-box; }
+    :root {
+      --brown-dark: rgba(68, 34, 2, 0.9);
+      --cream: rgba(250, 249, 248, 1);
+      --highlight: #ffdd99;
+      --overlay: rgba(0,0,0,0.75);
+      --button-hover: #ffe5b3;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
       font-family: 'Poppins', sans-serif;
-      color: #fcf9f9;
+      color: var(--cream);
       background: url('imgdolci.jpg') no-repeat center center fixed;
       background-size: cover;
+      min-height: 100vh;
     }
 
     header {
       text-align: center;
-      padding: 40px 20px;
-      border-bottom: 5px solid rgba(68, 34, 2, 0.788);
+      padding: 50px 20px;
+      border-bottom: 5px solid var(--brown-dark);
+      background: var(--overlay);
     }
 
     header h1 {
-      font-size: 3em;
-      color: rgb(250, 249, 248);
-      margin: 0;
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      color: var(--highlight);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      margin-bottom: 10px;
     }
 
     header p {
-      font-size: 1.2em;
-      margin: 10px 0;
+      font-size: 1.2rem;
     }
 
     nav {
-      background-color: rgba(68, 34, 2, 0.788);
+      background-color: var(--brown-dark);
       text-align: center;
       padding: 15px 0;
     }
 
     nav a {
-      color: #fff;
+      color: var(--cream);
       text-decoration: none;
-      font-weight: bold;
-      margin: 0 15px;
-      transition: color 0.3s;
+      font-weight: 600;
+      margin: 0 20px;
+      transition: color 0.3s ease;
     }
 
     nav a:hover {
-      color: #ffdd99;
+      color: var(--highlight);
     }
+
+    .hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 20px;
+  background: rgb(48, 24, 2);
+  backdrop-filter: blur(3px);
+}
 
     .menu-section {
       padding: 60px 20px;
-      background-color: rgba(119, 60, 4, 0.295);
       text-align: center;
+      
     }
 
     .menu-section h2 {
-      font-size: 2.5em;
-      color: #fff;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-family: 'Cinzel', serif;
+      color: var(--highlight);
+      font-size: 2.8rem;
+      margin-bottom: 40px;
     }
 
-    .dessert-menu {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+    /* Griglia dolci */
+    .dolce-menu {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 30px;
+      justify-items: center;
+      padding: 0 20px;
     }
 
-    .dessert-card {
-      background-color: rgba(68, 34, 2, 0.788);
-      border: 2px solid #f6f1f1;
-      border-radius: 12px;
-      width: 300px;
+    .dolce-menu 
+    .drink-card {
+      background-color: var(--brown-dark);
+      border-radius: 15px;
+      width: 103%;
+      max-width: 500px;
       overflow: hidden;
-      box-shadow: 0 5px 20px rgba(68, 34, 2, 0.788);
-      transition: transform 0.3s;
-      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 15px;
     }
 
-    .dessert-card:hover {
-      transform: scale(1.05);
-    }
+    
 
-    .dessert-card img {
+    .drink-card img {
       width: 100%;
-      height: 200px;
+      height: 400px;
       object-fit: cover;
+      border-bottom: 3px solid var(--highlight);
     }
 
-    .dessert-card h3 {
-      color: #fff;
+    .drink-card h3 {
       margin: 15px 0 10px;
-      font-size: 1.5em;
+      font-size: 1.6rem;
     }
 
-    .dessert-card p {
+    .drink-card p {
       padding: 0 15px;
-      color: rgba(251, 250, 249, 0.9);
-      font-size: 1em;
+      font-size: 1rem;
+      text-align: center;
     }
 
     .price {
-      display: block;
-      margin: 10px 0 20px;
       font-weight: bold;
-      color: #ffdd99;
-      font-size: 1.2em;
+      font-size: 1.2rem;
+      margin: 10px 0;
+      color: var(--highlight);
+    }
+
+    .cart-btn {
+      background: var(--highlight);
+      color: var(--brown-dark);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-bottom: 10px;
+    }
+
+    .cart-btn:hover {
+      background: var(--button-hover);
     }
 
     footer {
-      background-color: rgba(68, 34, 2, 0.788);
-      color: white;
+      background-color: var(--brown-dark);
+      color: var(--cream);
       text-align: center;
-      padding: 20px;
-      font-size: 1em;
+      padding: 25px;
+      font-size: 1rem;
     }
 
     footer a {
-      color: white;
+      color: var(--cream);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
 
-    /* ===== MODALE ===== */
-    .modal {
-      display: none;
+    /* Cart Icon */
+    .cart-icon {
       position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: rgba(68, 34, 2, 0.95);
-      border-radius: 12px;
-      padding: 30px;
-      width: 90%;
-      max-width: 400px;
-      color: #fff;
-      text-align: left;
-      position: relative;
-    }
-
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      color: #fff;
-      font-size: 1.5em;
+      top: 20px;
+      right: 25px;
+      font-size: 2.2rem;
       cursor: pointer;
+      z-index: 2000;
+      color: var(--highlight);
+      text-shadow: 2px 2px 4px #000;
     }
 
-    form label {
-      display: block;
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: red;
+      color: white;
+      padding: 3px 7px;
+      font-size: 0.8rem;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    /* Cart Popup */
+    .cart-popup {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      width: 350px;
+      background: var(--brown-dark);
+      border: 2px solid var(--highlight);
+      border-radius: 12px;
+      padding: 20px;
+      color: white;
+      display: none;
+      z-index: 3000;
+      box-shadow: 0 5px 20px var(--overlay);
+    }
+
+    .cart-popup h3 {
+      font-family: 'Cinzel', serif;
+      text-align: center;
+      color: var(--highlight);
+      margin-bottom: 15px;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid var(--highlight);
+      padding: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+    }
+
+    .cart-total {
       margin-top: 15px;
       font-weight: bold;
+      text-align: right;
+      color: var(--highlight);
     }
 
-    form input, form select {
-      width: 100%;
+    .order-form {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .order-form input {
       padding: 8px;
-      margin-top: 5px;
-      border-radius: 8px;
+      border-radius: 6px;
       border: none;
+      font-size: 0.95rem;
     }
 
-    .order-btn {
-      margin-top: 20px;
-      background-color: #ffdd99;
-      color: #442202;
+    .order-form button {
+      background: var(--highlight);
+      border: none;
+      padding: 10px;
       font-weight: bold;
-      border: none;
       border-radius: 8px;
-      padding: 10px 20px;
       cursor: pointer;
-      width: 100%;
-      font-size: 1em;
-      transition: 0.3s;
+      transition: background 0.3s;
     }
 
-    .order-btn:hover {
-      background-color: #ffe6b3;
+    .order-form button:hover {
+      background: var(--button-hover);
+    }
+
+    .confirmation {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      color: var(--highlight);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 1200px) {
+      .dolce-menu { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .dolce-menu { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .dolce-menu { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.4rem; }
+      .menu-section h2 { font-size: 2rem; }
+      .drink-card img { height: 180px; }
+    }
+    @media (max-width: 480px) {
+      nav a { margin: 0 10px; }
+      .cart-popup { width: 90%; right: 5%; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Ristorante Bella Vita</h1>
-    <p>I dolci della tradizione italiana 🍮</p>
-  </header>
+<!-- Cart Icon -->
+<div class="cart-icon" onclick="toggleCart()">
+  🛒
+  <span class="cart-count" id="cartCount">0</span>
+</div>
 
-  <nav>
-    <a href="../pizzeria.html">Home</a>
-  </nav>
+<!-- Cart Popup -->
+<div class="cart-popup" id="cartPopup">
+  <h3>Il tuo carrello</h3>
+  <div id="cartItems"></div>
+  <p class="cart-total" id="cartTotal">Totale: €0.00</p>
 
-  <section class="menu-section">
-    <h2>I Nostri Dolci</h2>
-    <div class="dessert-menu">
+  <!-- Order Form -->
+  <form class="order-form" id="orderForm" onsubmit="submitOrder(event)">
+    <input type="text" id="customerName" placeholder="Nome e Cognome" required>
+    <input type="text" id="customerAddress" placeholder="Indirizzo" required>
+    <input type="tel" id="customerPhone" placeholder="Telefono" required>
+    <button type="submit">Ordina Ora</button>
+  </form>
+  <div class="confirmation" id="confirmationMsg"></div>
 
-      <div class="dessert-card" data-dessert="Tiramisù">
-        <img src="tiramisu.jpg" alt="Tiramisù">
-        <h3>Tiramisù</h3>
-        <p>Classico con savoiardi, mascarpone e cacao amaro.</p>
-        <span class="price">€5,00</span>
-      </div>
+  <button class="cart-btn" onclick="clearCart()">Svuota Carrello</button>
+</div>
 
-      <div class="dessert-card" data-dessert="Panna Cotta">
-        <img src="pannacotta.jpg" alt="Panna Cotta">
-        <h3>Panna Cotta</h3>
-        <p>Delicata panna cotta con coulis ai frutti di bosco.</p>
-        <span class="price">€4,50</span>
-      </div>
+<header>
+  <h1>pizzeria Bella Vita</h1>
+  <p>Dolci freschi e golosi della tradizione italiana 🍰</p>
+</header>
 
-      <div class="dessert-card" data-dessert="Cheesecake">
-        <img src="cheesecake.jpg" alt="Cheesecake">
-        <h3>Cheesecake</h3>
-        <p>Base croccante con crema al formaggio e salsa ai lamponi.</p>
-        <span class="price">€5,50</span>
-      </div>
+<nav>
+  <a href="../pizzeria.html">Home</a>
+</nav>
+<section class="hero">
+<div class="menu-section">
+  <h2>I NOSTRI DOLCI</h2>
+  <div class="dolce-menu">
 
-      <div class="dessert-card" data-dessert="Cannolo Siciliano">
-        <img src="cannolo.jpg" alt="Cannolo Siciliano">
-        <h3>Cannolo Siciliano</h3>
-        <p>Cialda croccante ripiena di ricotta dolce e gocce di cioccolato.</p>
-        <span class="price">€4,50</span>
-      </div>
-
-      <div class="dessert-card" data-dessert="Torta al Cioccolato">
-        <img src="tortacioccolato.jpg" alt="Torta al Cioccolato">
-        <h3>Torta al Cioccolato</h3>
-        <p>Fetta di torta al cioccolato fondente, servita calda.</p>
-        <span class="price">€5,00</span>
-      </div>
-
-      <div class="dessert-card" data-dessert="Gelato Artigianale">
-        <img src="gelato.jpg" alt="Gelato Artigianale">
-        <h3>Gelato Artigianale</h3>
-        <p>Due gusti a scelta tra vaniglia, nocciola, pistacchio o fragola.</p>
-        <span class="price">€4,00</span>
-      </div>
-
-      <div class="dessert-card" data-dessert="Sorbetto al Limone">
-        <img src="sorbetto.jpg" alt="Sorbetto al Limone">
-        <h3>Sorbetto al Limone</h3>
-        <p>Rinfrescante e leggero, perfetto dopo cena.</p>
-        <span class="price">€3,50</span>
-      </div>
-
-      <div class="dessert-card" data-dessert="Profiteroles">
-        <img src="profiteroles.jpg" alt="Profiteroles">
-        <h3>Profiteroles</h3>
-        <p>Bignè ripieni di panna e ricoperti di cioccolato fondente.</p>
-        <span class="price">€5,00</span>
-      </div>
-
+    <div class="drink-card">
+      <img src="tiramisu.jpg" alt="Tiramisù">
+      <h3>Tiramisù</h3>
+      <p>Classico dolce al caffè con crema al mascarpone.</p>
+      <span class="price">€5,00</span>
+      <button class="cart-btn" onclick="addToCart('Tiramisù', 5)">Aggiungi al Carrello</button>
     </div>
-  </section>
 
-  <footer>
-    © 2025 Ristorante Bella Vita · Via Roma 25, Milano · 
-    <a href="tel:+390612345678">06 1234 5678</a> · 
-    <a href="mailto:info@bellavita.it">info@bellavita.it</a>
-  </footer>
-
-  <!-- MODALE -->
-  <div class="modal" id="orderModal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2 id="dessertName"></h2>
-      <form id="orderForm">
-        <label for="quantity">Quantità:</label>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
-
-        <label for="notes">Note aggiuntive:</label>
-        <input type="text" id="notes" name="notes" placeholder="Es. con panna, senza cacao, ecc.">
-
-        <button type="submit" class="order-btn">Invia Ordine</button>
-      </form>
+    <div class="drink-card">
+      <img src="pannacotta.jpg" alt="Panna Cotta">
+      <h3>Panna Cotta</h3>
+      <p>Dolce cremoso con coulis di frutti di bosco.</p>
+      <span class="price">€4,50</span>
+      <button class="cart-btn" onclick="addToCart('Panna Cotta', 4.5)">Aggiungi al Carrello</button>
     </div>
+
+    <div class="drink-card">
+      <img src="cheesecake.jpg" alt="Cheesecake">
+      <h3>Cheesecake</h3>
+      <p>Classica cheesecake alla vaniglia con base croccante.</p>
+      <span class="price">€5,50</span>
+      <button class="cart-btn" onclick="addToCart('Cheesecake', 5.5)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+      <img src="cannolo.jpg" alt="Cannolo Siciliano">
+      <h3>Cannolo Siciliano</h3>
+      <p>Cialda croccante ripiena di ricotta dolce.</p>
+      <span class="price">€4,50</span>
+      <button class="cart-btn" onclick="addToCart('Cannolo Siciliano', 4.5)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+      <img src="gelato.jpg" alt="Gelato Artigianale">
+      <h3>Gelato Artigianale</h3>
+      <p>Gelato fresco fatto in casa, vari gusti disponibili.</p>
+      <span class="price">€3,50</span>
+      <button class="cart-btn" onclick="addToCart('Gelato Artigianale', 3.5)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+      <img src="sorbetto.jpg" alt="Sorbetto al Limone">
+      <h3>Sorbetto al Limone</h3>
+      <p>Sorbetto fresco e leggero al gusto di limone.</p>
+      <span class="price">€3,00</span>
+      <button class="cart-btn" onclick="addToCart('Sorbetto al Limone', 3)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+      <img src="profiteroles.jpg" alt="Profiteroles">
+      <h3>Profiteroles</h3>
+      <p>Pasta choux ripiena di crema e ricoperta di cioccolato.</p>
+      <span class="price">€5,00</span>
+      <button class="cart-btn" onclick="addToCart('Profiteroles', 5)">Aggiungi al Carrello</button>
+    </div>
+
+    <div class="drink-card">
+  <img src="tartufo.jpg" alt="Tartufo al Cioccolato">
+  <h3>Tartufo al Cioccolato</h3>
+  <p>Delizioso dolce al cioccolato con cuore fondente e cacao.</p>
+  <span class="price">€6,00</span>
+  <button class="cart-btn" onclick="addToCart('Tartufo al Cioccolato', 6)">Aggiungi al Carrello</button>
+</div>
+
+
   </div>
+</section>
 
-  <script>
-    const modal = document.getElementById("orderModal");
-    const closeBtn = document.querySelector(".close");
-    const dessertNameEl = document.getElementById("dessertName");
-    const dessertCards = document.querySelectorAll(".dessert-card");
+<footer>
+  © 2025 pizzeria Bella Vita · Via Roma 25, Milano · 
+  <a href="tel:+390612345678">06 1234 5678</a> · 
+  <a href="mailto:info@bellavita.it">info@bellavita.it</a>
+</footer>
 
-    dessertCards.forEach(card => {
-      card.addEventListener("click", () => {
-        const dessertName = card.getAttribute("data-dessert");
-        dessertNameEl.textContent = "Ordina " + dessertName;
-        modal.style.display = "flex";
-      });
-    });
+<script>
+let cart = [];
 
-    closeBtn.onclick = () => {
-      modal.style.display = "none";
-    };
+function toggleCart() {
+  const popup = document.getElementById("cartPopup");
+  popup.style.display = popup.style.display === "block" ? "none" : "block";
+}
 
-    window.onclick = (e) => {
-      if (e.target == modal) modal.style.display = "none";
-    };
+function addToCart(name, price) {
+  const item = cart.find(p => p.name === name);
+  if(item) item.qty++;
+  else cart.push({ name, price, qty: 1 });
+  updateCart();
+}
 
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("Ordine inviato con successo! 🍮");
-      modal.style.display = "none";
-    });
-  </script>
+function updateCart() {
+  const cartItems = document.getElementById("cartItems");
+  const cartCount = document.getElementById("cartCount");
+  const cartTotal = document.getElementById("cartTotal");
+
+  cartItems.innerHTML = "";
+  let total = 0;
+  let count = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.qty;
+    count += item.qty;
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <span>${item.name} x${item.qty}</span>
+        <span>€${(item.price * item.qty).toFixed(2)}</span>
+      </div>
+    `;
+  });
+
+  cartTotal.textContent = "Totale: €" + total.toFixed(2);
+  cartCount.textContent = count;
+}
+
+function clearCart() {
+  cart = [];
+  updateCart();
+  document.getElementById("confirmationMsg").textContent = "";
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+  if(cart.length === 0) { alert("Il carrello è vuoto!"); return; }
+
+  const name = document.getElementById("customerName").value;
+  const address = document.getElementById("customerAddress").value;
+  const phone = document.getElementById("customerPhone").value;
+
+  const orderSummary = cart.map(item => `${item.name} x${item.qty}`).join(", ");
+
+  document.getElementById("confirmationMsg").textContent = 
+    `Grazie ${name}! Il tuo ordine (${orderSummary}) è stato ricevuto e sarà consegnato a ${address}. Ti contatteremo al ${phone}.`;
+
+  clearCart();
+  document.getElementById("orderForm").reset();
+}
+</script>
 
 </body>
 </html>

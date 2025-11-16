@@ -1,180 +1,577 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ristorante Bella Vita</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ristorante Bella Vita</title>
 
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      color: #fcf9f9;
-      background: url('img/imgforno.jpg') no-repeat center center fixed;
-      background-size: cover;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
-    header {
-      position: relative; /* Necessario per posizionare il logo all’interno */
-      text-align: center;
-      padding: 40px 20px;
-      border-bottom: 5px solid rgba(68, 34, 2, 0.788);
-    }
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background: url('img/imgforno.jpg') no-repeat center center fixed; 
+    background-size: cover; 
+    color: #fff; 
+    line-height: 1.6; 
+}
 
-    /* --- LOGO IN ALTO A DESTRA --- */
-    .logo-link {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-    }
+/* HEADER */
+header {
+  position: relative;
+  text-align: center;
+  padding: 60px 20px;
+  border-bottom: 5px solid #FFD699;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('img/imgforno.jpg') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(2px);
+}
 
-    .logo-link img {
-      width: 150px; /* dimensione del logo */
-      height: auto;
-      border-radius: 8px; /* opzionale, per angoli arrotondati */
-      transition: transform 0.3s ease;
-    }
+.logo-link { position: absolute; top: 20px; left: 40px; }
+.logo-link img { width: 200px; border-radius: 12px; transition: transform 0.5s ease, box-shadow 0.5s ease; }
+.logo-link img:hover { transform: scale(1.1); box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
 
-    .logo-link img:hover {
-      transform: scale(1.1);
-    }
+header h1 { 
+    font-family: 'Cinzel', serif; 
+    font-size: 4rem; 
+    color: #FFD699; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    margin-bottom: 10px; 
+    text-shadow: 2px 2px 6px #000;
+    animation: fadeInDown 1s ease;
+}
 
-    header h1 {
-      font-size: 3em;
-      color: rgb(250, 249, 248);
-      margin: 0;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
+header p { 
+    font-size: 1.3rem; 
+    color: #fff8e1; 
+    text-shadow: 1px 1px 4px #000;
+    animation: fadeInUp 1s ease;
+}
 
-    header p {
-      font-size: 1.2em;
-      margin: 10px 0;
-    }
+/* ANIMAZIONI HEADER */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-30px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
 
-    header a {
-      color: #fcf8f8;
-      font-weight: bold;
-      text-decoration: none;
-    }
+/* ICONA MENU (NUOVA) */
+.menu-icon {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: #FFD699;
+  transition: transform 0.3s ease;
+  z-index: 2000;
+}
+.menu-icon:hover { transform: scale(1.15); }
 
-    nav {
-      background-color: rgba(68, 34, 2, 0.788);
-      text-align: center;
-      padding: 15px 0;
-    }
+/* MENU LATERALE (NUOVO) */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -330px;
+  width: 330px;
+  height: 100%;
+  background: rgba(34, 17, 0, 0.96);
+  backdrop-filter: blur(6px);
+  color: white;
+  padding: 45px 30px;
+  transition: right 0.4s ease, opacity 0.4s ease;
+  z-index: 3000;
+  opacity: 0;
+  border-left: 3px solid #FFD699;
+}
 
-    .hero {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      padding: 80px 20px;
-      background-color: rgba(119, 60, 4, 0.295);
-    }
+/* Apertura */
+.side-menu.open {
+  right: 0;
+  opacity: 1;
+  animation: fadeSlide 0.4s ease forwards;
+}
 
-    .card {
-      width: 320px;
-      border: 2px solid #f6f1f1;
-      border-radius: 12px;
-      overflow: hidden;
-      background-color: rgba(68, 34, 2, 0.788);
-      box-shadow: 0 5px 20px rgba(68, 34, 2, 0.788);
-      transition: transform 0.3s;
-      text-align: center;
-    }
+@keyframes fadeSlide {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
 
-    .card:hover {
-      transform: scale(1.05);
-    }
+/* Bottone chiudi */
+.close-menu {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  font-size: 2.5rem;
+  cursor: pointer;
+  color: #FFD699;
+  transition: 0.3s;
+}
+.close-menu:hover { transform: scale(1.2); }
 
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
+/* SOCIAL ICONS */
+.social-icons { margin-top: 10px; }
 
-    .card h3 {
-      color: rgb(249, 247, 246);
-      margin: 15px 0 10px;
-      font-size: 1.4em;
-    }
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+  font-size: 1.2rem;
+  color: #FFD699;
+  text-decoration: none;
+  transition: 0.3s;
+}
 
-    .card p {
-      padding: 0 15px 20px;
-      color: rgba(251, 250, 249, 0.974);
-    }
+.social-link:hover {
+  transform: translateX(6px);
+  color: #ffe7b3;
+}
 
-    footer {
-      background-color: rgba(68, 34, 2, 0.788);
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
+/* MENU */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 20px;
+  background: rgba(48, 24, 2, 0.918);
+  backdrop-filter: blur(3px);
+}
 
-    footer a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.menu-title { 
+    width: 100%; 
+    text-align: center; 
+    font-family: 'Cinzel', serif; 
+    font-size: 4rem; 
+    margin-bottom: 50px; 
+    color: #FFD699;
+    text-shadow: 2px 2px 4px #000;
+    transition: all 0.5s ease;
+}
 
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+.card {
+  width: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+  backdrop-filter: blur(2px);
+  position: relative;
+}
+.card:hover { 
+    transform: translateY(-10px) scale(1.05); 
+    box-shadow: 0 20px 30px rgba(0,0,0,0.7); 
+    background: rgba(255,255,255,0.12);
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 3px solid #FFD699;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+.card:hover img { transform: scale(1.05); filter: brightness(1.2); }
+
+.card h3 {
+    font-family: 'Cinzel', serif;
+    margin: 15px 0 10px;
+    font-size: 2rem;
+    color: #FFD699;
+}
+
+.card p {
+    padding: 0 15px 20px;
+    color: #fffbe6;
+    font-size: 1.1rem;
+}
+
+/* BOOKING SECTION */
+.booking-section {
+  padding: 0;
+  background: rgba(68,34,2,0.9);
+  border-top: 5px solid #FFD699;
+  border-bottom: 5px solid #FFD699;
+}
+
+.booking-container {
+  display: flex;
+  width: 100%;
+  height: 300px;
+}
+
+.booking-info.side {
+  flex: 1;
+  background: rgba(55,25,0,0.9);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.booking-main.center {
+  flex: 1.5;
+  background: rgba(255,255,255,0.15);
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-left: 6px solid #442206;
+  border-right: 6px solid #442206;
+}
+
+.booking-main h2 { font-family: 'Cinzel', serif; font-size: 2.2rem; margin-bottom: 20px; color: #FFD699; text-shadow: 1px 1px 3px #000; }
+.booking-main p { margin-bottom: 25px; color: #fffbe6; }
+
+.booking-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #442206;
+  background: #FFD699;
+  padding: 14px 45px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+}
+.booking-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  background: #ffe6a1;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: linear-gradient(145deg, #442206, #77400c);
+  padding: 40px 30px;
+  border-radius: 25px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.modal-content h3 { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 25px; color: #FFD699; }
+
+.modal-content input,
+.modal-content select {
+  width: 90%;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+.modal-content button {
+  width: 95%;
+  padding: 14px;
+  margin-top: 15px;
+  border-radius: 15px;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #FFD699;
+  color: #442206;
+  cursor: pointer;
+}
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2em;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* FOOTER */
+footer {
+  background: rgba(68,34,2,0.95);
+  color: #fff;
+  text-align: center;
+  padding: 25px;
+}
+footer a { color: #FFD699; font-weight: bold; text-decoration: none; }
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .booking-container { flex-direction: column; height: auto; }
+  .booking-info.side, .booking-main.center { flex: none; width: 100%; border: none; border-radius: 20px; margin: 10px 0; }
+  .booking-btn { width: 80%; }
+  .hero { flex-direction: column; gap: 30px; }
+  .card { width: 90%; }
+}
+</style>
 </head>
 <body>
 
-  <header>
-    <!-- 🔹 LOGO IN ALTO A DESTRA -->
-    <a href="logo.html" class="logo-link">
-      <img src="img/logo.png" alt="Logo Ristorante Bella Vita">
+<header>
+  <a href="logo.html" class="logo-link">
+    <img src="img/log.png" alt="Logo Ristorante Bella Vita">
+  </a>
+
+  <!-- ICONA MENU -->
+  <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+  <h1>pizzeria Bella Vita</h1>
+  <p>Forno a legna e tradizione italiana 🍕</p>
+</header>
+
+<!-- MENU LATERALE -->
+<div id="sideMenu" class="side-menu">
+
+  <span class="close-menu" onclick="toggleMenu()">×</span>
+
+  <h3>Informazioni</h3>
+  <p><b>Indirizzo:</b><br>Via Roma 25, Milano</p>
+  <p><b>Telefono:</b><br><a href="tel:+390612345678">06 1234 5678</a></p>
+  <p><b>Email:</b><br><a href="mailto:info@bellavita.it">info@bellavita.it</a></p>
+
+  <h3>Seguici</h3>
+  <div class="social-icons">
+
+    <a href="#" target="_blank" class="social-link">
+      <!-- FACEBOOK -->
+      <svg width="26" height="26" fill="#FFD699" viewBox="0 0 24 24">
+        <path d="M22.675 0h-21.35C.597 0 0 .597 
+        0 1.326v21.348C0 23.403.597 24 
+        1.326 24h11.495v-9.294H9.691v-3.622h3.13V8.413c0-3.1 
+        1.893-4.788 4.659-4.788 1.325 0 
+        2.464.099 2.796.143v3.24l-1.918.001c-1.504 
+        0-1.796.715-1.796 1.764v2.314h3.587l-.467 
+        3.622h-3.12V24h6.116C23.403 
+        24 24 23.403 24 22.674V1.326C24 
+        .597 23.403 0 22.675 0z"/>
+      </svg>
+      Facebook
     </a>
 
-    <h1>Ristorante Bella Vita</h1>
-    <p>Forno a legna e tradizione italiana 🍕</p>
-    <p><strong>Telefono:</strong> <a href="tel:+390612345678">06 1234 5678</a></p>
-  </header>
+    <a href="#" target="_blank" class="social-link">
+      <!-- INSTAGRAM -->
+      <svg width="26" height="26" fill="#FFD699" viewBox="0 0 24 24">
+        <path d="M12 2.163c3.204 0 
+        3.584.012 4.85.07 1.17.056 1.97.24 
+        2.427.403a4.92 4.92 0 011.75 
+        1.145 4.92 4.92 0 011.145 
+        1.75c.163.457.347 1.257.403 
+        2.427.058 1.266.07 1.646.07 
+        4.85s-.012 3.584-.07 
+        4.85c-.056 1.17-.24 1.97-.403 
+        2.427a4.92 4.92 0 
+        01-1.145 1.75 4.92 4.92 0 
+        01-1.75 1.145c-.457.163-1.257.347-2.427.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.056-1.97-.24-2.427-.403a4.92 4.92 0 
+        01-1.75-1.145 4.92 4.92 0 
+        01-1.145-1.75c-.163-.457-.347-1.257-.403-2.427C2.175 
+        15.784 2.163 15.404 2.163 
+        12s.012-3.584.07-4.85c.056-1.17.24-1.97.403-2.427a4.92 4.92 0 
+        011.145-1.75A4.92 4.92 0 
+        015.531.75c.457-.163 1.257-.347 
+        2.427-.403C8.225 2.175 8.605 
+        2.163 12 2.163zm0 3.675a6.162 
+        6.162 0 100 12.324 6.162 
+        6.162 0 000-12.324zm7.406-1.845a1.44 
+        1.44 0 11-2.88 0 1.44 1.44 0 
+        012.88 0z"/>
+      </svg>
+      Instagram
+    </a>
 
-  <nav>
-    <a href="relazione.html">Relazione</a>
-  </nav>
+    <a href="#" target="_blank" class="social-link">
+      <!-- TIKTOK -->
+      <svg width="26" height="26" fill="#FFD699" viewBox="0 0 24 24">
+        <path d="M12.525 2c1.068 3.03 3.815 
+        5.19 7.075 5.19v3.39c-2.46 0-4.68-.84-6.45-2.25v7.62a6.06 
+        6.06 0 11-6.06-6.06c.45 0 .87.06 
+        1.29.15v3.99a2.67 2.67 0 
+        102.67 2.67V2h3.48z"/>
+      </svg>
+      TikTok
+    </a>
 
-  <section class="hero">
-    <div class="card">
-      <a href="pizze/pizze.html">
-        <img src="img/imgpizze.jpg" alt="Le nostre pizze">
-      </a>
-      <h3>Pizze</h3>
-      <p>Le migliori pizze cotte nel nostro forno a legna, con ingredienti freschi e selezionati.</p>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="menu-title">Menù</div>
+
+  <div class="card">
+    <a href="pizze/pizze.html"><img src="img/imgpizze.jpg" alt="Le nostre pizze"></a>
+    <h3>Pizze</h3>
+    <p>Le migliori pizze cotte nel nostro forno a legna, con ingredienti freschi e selezionati.</p>
+  </div>
+
+  <div class="card">
+    <a href="bevande/bevande.html"><img src="img/imgbevande.jpg" alt="Le nostre bevande"></a>
+    <h3>Bevande</h3>
+    <p>Birre artigianali, vini italiani e bevande rinfrescanti.</p>
+  </div>
+
+  <div class="card">
+    <a href="dolci/dolci.html"><img src="img/imgdolci.jpg" alt="I nostri dolci"></a>
+    <h3>Dolci</h3>
+    <p>Tiramisù, panna cotta e dolci della casa.</p>
+  </div>
+</section>
+
+<section class="booking-section">
+  <div class="booking-container">
+
+    <div class="booking-info side">
+      <h3>Orari di apertura</h3>
+      <p>Lun-Ven: 12:00 - 15:00 / 19:00 - 23:00<br>Sab-Dom: 19:00 - 24:00</p>
     </div>
 
-    <div class="card">
-      <a href="bevande/bevande.html">
-        <img src="img/imgbevande.jpg" alt="Le nostre bevande">
-      </a>
-      <h3>Bevande</h3>
-      <p>Birre artigianali, vini italiani e bevande rinfrescanti per accompagnare ogni piatto.</p>
+    <div class="booking-main center">
+      <h2>Prenota Tavolo</h2>
+      <p>Seleziona data e orario, inserisci i tuoi dati e conferma la prenotazione!</p>
+      <button class="booking-btn" onclick="openModal()">Prenota Ora</button>
     </div>
 
-    <div class="card">
-      <a href="dolci/dolci.html">
-        <img src="img/imgdolci.jpg" alt="I nostri dolci">
-      </a>
-      <h3>Dolci</h3>
-      <p>Tiramisù, panna cotta e dolci della casa per concludere in dolcezza la tua esperienza.</p>
+    <div class="booking-info side">
+      <h3>Specialità della casa</h3>
+      <p>Pizza Margherita, Tiramisù artigianale,<br>Pane e focaccia fatti in casa</p>
     </div>
-  </section>
 
-  <footer>
-    © 2025 Ristorante Bella Vita · Via Roma 25, Milano · 
-    <a href="tel:+390612345678">06 1234 5678</a> · 
-    <a href="mailto:info@bellavita.it">info@bellavita.it</a>
-  </footer>
+  </div>
+</section>
+
+<!-- MODAL PRENOTAZIONI -->
+<div class="modal" id="bookingModal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>Prenota il tuo tavolo</h3>
+
+    <input type="text" placeholder="Nome" id="name" required>
+    <input type="tel" placeholder="Telefono" id="phone" required>
+    <input type="date" id="date" required>
+
+    <!-- ORARI DINAMICI -->
+    <select id="time" required>
+      <option value="">Seleziona orario</option>
+    </select>
+
+    <button onclick="submitBooking()">Invia</button>
+  </div>
+</div>
+
+<footer>
+  © 2025 pizzeria Bella Vita · Via Roma 25, Milano · 
+  <a href="tel:+390612345678">06 1234 5678</a> · 
+  <a href="mailto:info@bellavita.it">info@bellavita.it</a>
+</footer>
+
+<script>
+function openModal() { 
+  document.getElementById('bookingModal').style.display = 'flex'; 
+}
+function closeModal() { 
+  document.getElementById('bookingModal').style.display = 'none'; 
+}
+window.onclick = function(event) {
+  if(event.target == document.getElementById('bookingModal')) closeModal();
+}
+
+/* MENU LATERALE */
+function toggleMenu() {
+  const menu = document.getElementById("sideMenu");
+  menu.classList.toggle("open");
+}
+
+/* ORARI DINAMICI */
+document.getElementById('date').addEventListener('change', updateAvailableTimes);
+
+function updateAvailableTimes() {
+  const dateInput = document.getElementById('date').value;
+  const timeSelect = document.getElementById('time');
+
+  timeSelect.innerHTML = '<option value="">Seleziona orario</option>';
+
+  if (!dateInput) return;
+
+  const day = new Date(dateInput).getDay();
+
+  let slots = [];
+
+  function generateTimes(start, end) {
+    const times = [];
+    let current = new Date(`2000-01-01 ${start}`);
+    const endTime = new Date(`2000-01-01 ${end}`);
+    
+    while (current <= endTime) {
+      const hh = current.getHours().toString().padStart(2,'0');
+      const mm = current.getMinutes().toString().padStart(2,'0');
+      times.push(`${hh}:${mm}`);
+      current.setMinutes(current.getMinutes() + 30);
+    }
+    return times;
+  }
+
+  if (day >= 1 && day <= 5) {
+    slots = [
+      ...generateTimes("12:00", "15:00"),
+      ...generateTimes("19:00", "23:00")
+    ];
+  } else {
+    slots = generateTimes("19:00", "24:00");
+  }
+
+  slots.forEach(time => {
+    const option = document.createElement('option');
+    option.value = time;
+    option.textContent = time;
+    timeSelect.appendChild(option);
+  });
+}
+
+/* INVIA PRENOTAZIONE */
+function submitBooking(){
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  
+  if(!name || !phone || !date || !time){
+    alert("Per favore, compila tutti i campi.");
+    return;
+  }
+  
+  alert(`Grazie ${name}! La tua prenotazione per il ${date} alle ${time} è stata inviata.`);
+  
+  closeModal();
+
+  document.getElementById('name').value = '';
+  document.getElementById('phone').value = '';
+  document.getElementById('date').value = '';
+  document.getElementById('time').innerHTML = '<option value="">Seleziona orario</option>';
+}
+</script>
 
 </body>
 </html>
