@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizzeria Bella Vita - La Nostra Storia</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url(imgforno.jpg) no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 60px 20px;
+  border-bottom: 5px solid #FFD699;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('img/imgforno.jpg') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(2px);
+  position: relative;
+}
+
+.logo-link {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+.logo-link img {
+  width: 180px;
+  border-radius: 12px;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.logo-link img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 3.4rem;
+  color: #FFD699;
+  text-shadow: 2px 2px 5px #000;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.3rem;
+  color: #fff8e1;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 20px;
+  background: rgba(48, 24, 2, 0.918);
+  backdrop-filter: blur(3px);
+}
+
+/* CONTENT */
+.section {
+  padding: 60px 25px;
+  background: rgba(48,24,2,0.9);
+  backdrop-filter: blur(3px);
+  border-left: 6px solid #442206;
+  border-right: 6px solid #442206;
+  margin: 40px auto;
+  max-width: 1100px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.section h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.7rem;
+  color: #FFD699;
+  margin-bottom: 25px;
+  text-align: center;
+  text-shadow: 2px 2px 4px #000;
+}
+
+.section p {
+  font-size: 1.2rem;
+  color: #fffbe6;
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+/* FOOTER */
+footer {
+  background: rgba(68,34,2,0.95);
+  text-align: center;
+  padding: 25px;
+  color: #fff;
+}
+footer a { color: #FFD699; text-decoration: none; font-weight: bold; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <a href="../pizzeria.html" class="logo-link">
+    <img src="log.png" alt="Logo Pizzeria Bella Vita">
+  </a>
+  <h1>La Nostra Storia</h1>
+  <p>Passione per la tradizione italiana dal 1985</p>
+</header>
+
+<section class="hero">
+  <div class="section">
+
+
+  <h2>Chi Siamo</h2>
+  <p>
+    La <strong>Pizzeria Bella Vita</strong> nasce nel cuore di Milano come piccolo laboratorio artigianale 
+    dedicato alla pizza tradizionale cotta nel forno a legna. Fin dagli inizi abbiamo scelto 
+    ingredienti freschi, farine selezionate e un lievito madre tramandato da generazioni.
+  </p>
+  <p>
+    La nostra missione è portare in tavola il gusto autentico della cucina italiana, mantenendo vive 
+    le ricette di famiglia. Ogni pizza è preparata a mano dai nostri pizzaioli, che seguono 
+    una lavorazione lenta e accurata per garantire profumo, fragranza e leggerezza.
+  </p>
+  <p>
+    Negli anni la pizzeria è cresciuta, diventando un punto di riferimento per chi desidera 
+    un ambiente accogliente dove sentirsi a casa. Oggi continuiamo a mettere passione in ogni piatto, 
+    guidati dal desiderio di offrire un’esperienza semplice ma indimenticabile.
+  </p>
+</section>
+
+<footer>
+  © 2025 Pizzeria Bella Vita – Via Roma 25, Milano · 
+  <a href="tel:+390612345678">06 1234 5678</a> · 
+  <a href="mailto:info@bellavita.it">info@bellavita.it</a>
+</footer>
+
+</body>
+</html>
